@@ -12,3 +12,6 @@ Desenvolvido como projeto acadêmico para o curso de Engenharia da **Universidad
 
 ## 🛠️ Como Executar
 1. Execute 'requirements.py' e siga as instruçoes e inicie a simulação com ''python TorredeHanoi.py'' 
+
+## 📥 Download
+[Clique aqui para baixar o projeto completo em .zip](https://github.com/snwzin/Algoritmo-Estrutura-de-Dados/raw/refs/heads/main/Algest.zip)
