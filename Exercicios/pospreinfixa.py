@@ -25,9 +25,39 @@ def precedencia(opr1: str, opr2: str):
         return False
 
 def infixaparaposfixa(expressao_infixa: str):
-    pass
+    pilha_operadores = stack.Stack()
+    pilha_operadores.push('#') # sentinela para evitar erro de pilha vazia
+    pilha_saida = stack.Stack()
+    operadores = '+-*/^$'
+    for i in range(len(expressao_infixa)):
+        if expressao_infixa[i].isalnum():
+            pilha_saida.push(expressao_infixa[i])
+        
+        if expressao_infixa[i] == '(':
+            pilha_operadores.push(expressao_infixa[i])
 
-#print(infixaparaposfixa("A+B*C-(D/E-F)")) # expected output: "ABC*+DE/F-"
+        if expressao_infixa[i] == ')':
+            while pilha_operadores.peek() != '(':
+                pilha_saida.push(pilha_operadores.peek())
+                pilha_operadores.pop()
+            pilha_operadores.pop()
+        if expressao_infixa[i] in operadores:
+            while precedencia(pilha_operadores.peek(), expressao_infixa[i]):
+                pilha_saida.push(pilha_operadores.peek())
+                pilha_operadores.pop()
+            pilha_operadores.push(expressao_infixa[i])
+    while pilha_operadores.peek() != '#':
+        pilha_saida.push(pilha_operadores.peek())
+        pilha_operadores.pop()
+    resultado = []
+    while pilha_saida.peek() is not None:
+            resultado.append(pilha_saida.peek())
+            pilha_saida.pop()
+            
+        # Inverte para voltar à ordem original
+    return "".join(resultado[::-1])
+
+print(infixaparaposfixa("A+B*C-(D/E-F)")) # expected output: "ABC*+DE/F--"
 
 def infixaparaprefixa(expressao_infixa: str):
     pass
@@ -81,7 +111,7 @@ def posfixaparaprefixa(expressao_posfixa: str):
             pilha.push(expressao_posfixa[i] + op1 + op2)
     return pilha.peek()
 
-print(posfixaparaprefixa("AB+C-")) # expected output: "*-A/BC-/DEF"]
+#print(posfixaparaprefixa("AB+C-")) # expected output: "*-A/BC-/DEF"]
 
 def prefixaparaposfixa(expressao_prefixa: str):
     pilha = stack.Stack()
