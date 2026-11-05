@@ -6,6 +6,23 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import EstruturasDeDados.Data_Structures.Stack.stack as stack
 
+def precedencia(opr1: str, opr2: str):
+    def peso(operador: str):
+        if operador == '+' or operador == '-':
+            return 1
+        elif operador == '*' or operador == '/':
+            return 2
+        elif operador == '^' or operador == '$':
+            return 3
+        else:
+            return 0
+    diff = peso(opr1) - peso(opr2)
+    if (opr1 == '$' or opr1 == '^') and (opr2 == '$' or opr2 == '^'):
+        return False
+    if diff >= 0:
+        return True
+    else:
+        return False
 
 def infixaparaposfixa(expressao_infixa: str):
     pass
@@ -82,21 +99,3 @@ def prefixaparaposfixa(expressao_prefixa: str):
     return pilha.peek()
 
 #print(prefixaparaposfixa("*-A/BC-/DEF")) # expected output: "ABC/-DEF/-*"]
-
-def precedencia(opr1: str, opr2: str):
-    def peso(operador: str):
-        if operador == '+' or operador == '-':
-            return 1
-        elif operador == '*' or operador == '/':
-            return 2
-        elif operador == '^' or operador == '$':
-            return 3
-        else:
-            return 0
-    diff = peso(opr1) - peso(opr2)
-    if (opr1 == '$' or opr1 == '^') and (opr2 == '$' or opr2 == '^'):
-        return False
-    if diff >= 0:
-        return True
-    else:
-        return False
